@@ -1,0 +1,21 @@
+name: Gitee release
+
+on:
+  release:
+    types: [published, unpublished, created, edited, deleted, prereleased, released]
+
+jobs:
+  gitee-release:
+    runs-on: ubuntu-latest
+    env:
+      GITEE_USERNAME: ${{ secrets.GITEE_USERNAME }}
+      GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+    steps:      
+      - name: Release to gitee
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
+
+
+    
